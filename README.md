@@ -13,9 +13,10 @@ The original paper for Satoshi Nakamoto describing the blockchain could be found
 
 - The catch is that each block has the hash signature of the previous block, thus creating a secure "chain". Hence "block-chain"
 
+- We use `ProofOfWork#run` to calculate the hash and nonce of each block
+
 ### Test
 
-# Test it out
 
 ```ruby
 b0 = Block.first( "Genesis" )
