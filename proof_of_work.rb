@@ -25,7 +25,15 @@ class ProofOfWork
 
     def calc_hash_with_nonce(nonce=0)
       sha = Digest::SHA256.new
-      sha.update(nonce.to_s + block.index.to_s + block.timestamp.to_s + block.data + block.previous_hash )
+
+      sha.update(
+        nonce.to_s +
+        block.index.to_s +
+        block.timestamp.to_s +
+        block.data +
+        block.previous_hash
+      )
+
       sha.hexdigest
     end
 end

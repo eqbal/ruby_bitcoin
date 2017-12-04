@@ -8,19 +8,12 @@ require "./proof_of_work"
 
 class Block
 
-  attr_reader :index
-  attr_reader :timestamp
-  attr_reader :data
-  attr_reader :previous_hash
-  attr_reader :hash
-  attr_reader :nonce
-
   def initialize(index, data, previous_hash)
     @index         = index
     @timestamp     = Time.now
     @data          = data
     @previous_hash = previous_hash
-    @nonce, @hash  = ProofOfWork.new(self).run
+    @nonce, @hash  = calculate_hash
   end
 
   def self.first(data="Genesis")
@@ -30,4 +23,12 @@ class Block
   def self.next(previous, data="Transaction Data...")
     Block.new(previous.index+1, data, previous.hash)
   end
+
+  private
+
+    attr_reader :index, :timestamp, :data, :previous_hash, :hash, :nonce
+
+    def calculate_hash
+      ProofOfWork.new(self).run
+    end
 end
